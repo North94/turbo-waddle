@@ -39,7 +39,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
+                                <h3 class="card-title" th:text="'Categories [count:'+${categoriesPage.totalElements}+${#strings.isEmpty(search) ? '' : ', search: '+search}+']'">Categories</h3>
 
                                 <div class="card-tools">
                                     <form>
@@ -61,12 +61,15 @@
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>#</th>
+                                        <th><a th:class="'sort-'+${reverseSort}"
+                                                th:href="@{'/admin/categories'(s=${search}, field='name', direction=${reverseSort})}">Name</a></th>
                                         <th>#</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="category : ${categoriesPage.content}">
+                                    <tr th:each="category, it : ${categoriesPage.content}">
+                                        <td th:text="${it.index}+1"></td>
                                         <td th:text="${category.name}"></td>
                                         <td>
                                             <a th:href="@{'/categories/'+${category.id}}" class="btn btn-primary btn-sm">

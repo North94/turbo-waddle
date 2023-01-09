@@ -2,3 +2,9 @@
     color: crimson;
     font-size: larger ;
 }
+.sort-asc:after {
+    content: "↑"
+}
+.sort-desc:after {
+    content: "↓"
+}
