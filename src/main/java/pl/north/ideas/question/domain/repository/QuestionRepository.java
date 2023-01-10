@@ -13,6 +13,6 @@ import java.util.UUID;
 @Repository
 public interface QuestionRepository extends JpaRepository <Question, UUID> {
     List<Question> findAllByCategoryId(UUID id);
-    @Query("from Question q order by q.answers.size desc")
+    @Query(value = "from Question q order by q.answers.size desc")
     Page<Question> findHot(Pageable pageable);
 }

@@ -1,6 +1,5 @@
 package pl.north.ideas.category.controller;
 
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +13,11 @@ import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.service.CategoryService;
 import pl.north.ideas.common.dto.Message;
 
-import java.util.List;
+
+import javax.validation.Valid;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static pl.north.ideas.common.controller.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -40,7 +40,7 @@ public class CategoryAdminViewController {
             Model model
     ){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(direction), field);
-        String reverseSort = null;
+        String reverseSort;
         if("asc".equals(direction)){
             reverseSort = "desc";
         } else {
@@ -96,13 +96,5 @@ public class CategoryAdminViewController {
 
         return  "redirect:/admin/categories";
     }
-    private void paging(Model model, Page page) {
-        int totalPages = page.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
-    }
+
 }
