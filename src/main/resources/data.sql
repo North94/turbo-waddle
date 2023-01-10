@@ -38,6 +38,7 @@ values
     (gen_random_uuid(), 'ggg'),
     (gen_random_uuid(), 'hhh'),
     (gen_random_uuid(), 'jjj'),
+    (gen_random_uuid(), 'jjj'),
     (gen_random_uuid(), 'kkk'),
     (gen_random_uuid(), 'lll'),
     (gen_random_uuid(), 'zzz'),
@@ -46,5 +47,11 @@ values
 
 
 insert into questions (id, name, category_id)
-values (gen_random_uuid(), 'Gdzie najlepiej spędzić kulture w Polsce', (select  id from categories where name = 'Turystyka')),
-       (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje w Polsce', (select  id from categories where name = 'Turystyka'));
+values  (gen_random_uuid(), 'Gdzie najlepiej spędzić kultur w Polsce', (select id from categories where name = 'Gry')),
+        (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacj w Polsce', (select id from categories where name = 'Turystyka'));
+
+insert into questions (id, name, category_id)
+values  (gen_random_uuid(), 'Gdzie najlepiej spędzić kultre w Polsce', (select id from categories where name = 'Edukacja')),
+        (gen_random_uuid(), 'Gdzie najlepiej spędzić wakcje w Polsce', (select id from categories where name = 'Edukacja'));
+
+

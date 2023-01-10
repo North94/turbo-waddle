@@ -1,16 +1,16 @@
-package pl.north.ideas.category.domain.question.controller;
+package pl.north.ideas.question.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import pl.north.ideas.category.domain.question.domain.model.Question;
-import pl.north.ideas.category.domain.question.service.AnswerService;
-import pl.north.ideas.category.domain.question.service.QuestionService;
+import org.springframework.web.bind.annotation.*;
 import pl.north.ideas.category.service.CategoryService;
+import pl.north.ideas.question.domain.model.Question;
+import pl.north.ideas.question.service.AnswerService;
+import pl.north.ideas.question.service.QuestionService;
 
 import java.util.UUID;
 
@@ -34,7 +34,9 @@ public class QuestionViewController {
     @GetMapping
     public String indexView(Model model) {
         model.addAttribute("questions", questionsService.getQuestions());
-        model.addAttribute("categories", categoryService.getCategories(Pageable.unpaged()));
+        model.addAttribute("categories", categoryService.getCategories(
+                PageRequest.of(0, 10, Sort.by("name").ascending())
+                ));
         return "question/index";
     }
 
@@ -57,6 +59,19 @@ public class QuestionViewController {
         questionsService.createQuestion(question);
 
         return "redirect:/questions";
+
+    }
+    @GetMapping("hot")
+    public String hotView(
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            Model model
+    ){
+        PageRequest pageRequest = PageRequest.of(page - 1, 2);
+
+       Page<Question> questionsPage = questionsService.findHot(pageRequest);
+
+       model.addAttribute("questionsPage", questionsPage);
+        return "question/index";
 
     }
 }

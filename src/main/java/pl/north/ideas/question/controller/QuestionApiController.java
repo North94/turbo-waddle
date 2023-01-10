@@ -1,9 +1,9 @@
-package pl.north.ideas.category.domain.question.controller;
+package pl.north.ideas.question.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.north.ideas.category.domain.question.service.QuestionService;
-import pl.north.ideas.category.domain.question.domain.model.Question;
+import pl.north.ideas.question.domain.model.Question;
+import pl.north.ideas.question.service.QuestionService;
 
 import java.util.List;
 import java.util.UUID;

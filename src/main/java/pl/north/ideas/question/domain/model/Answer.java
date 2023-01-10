@@ -1,4 +1,4 @@
-package pl.north.ideas.category.domain.question.domain.model;
+package pl.north.ideas.question.domain.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.north.ideas.category.domain.model.Category;
-import pl.north.ideas.category.domain.question.domain.model.Question;
-import pl.north.ideas.category.domain.question.service.QuestionService;
+import pl.north.ideas.question.domain.model.Question;
+import pl.north.ideas.question.service.QuestionService;
 import pl.north.ideas.category.service.CategoryService;
 
 import java.util.List;

@@ -1,9 +1,12 @@
-package pl.north.ideas.category.domain.question.service;
+package pl.north.ideas.question.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.north.ideas.category.domain.question.domain.repository.QuestionRepository;
-import pl.north.ideas.category.domain.question.domain.model.Question;
+import pl.north.ideas.question.domain.model.Question;
+import pl.north.ideas.question.domain.repository.QuestionRepository;
 
 import java.util.List;
 import java.util.UUID;
@@ -48,5 +51,10 @@ public class QuestionService {
     public List<Question> findAllByCategoryId(UUID id) {
        return questionRepository.findAllByCategoryId(id);
 
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findHot(Pageable pageable) {
+        return questionRepository.findHot(pageable);
     }
 }
