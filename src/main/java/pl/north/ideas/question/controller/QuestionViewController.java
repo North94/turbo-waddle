@@ -74,7 +74,7 @@ public class QuestionViewController extends IdeasCommonViewController {
 
     }
     @GetMapping("unanswered")
-    public String hotunanswered(
+    public String unansweredView(
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model
     ){

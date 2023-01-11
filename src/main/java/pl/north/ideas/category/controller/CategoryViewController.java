@@ -27,6 +27,7 @@ public class CategoryViewController extends IdeasCommonViewController {
     public String singleView(@PathVariable UUID id, Model model){
         Category category = categoryService.getCategory(id);
         List<Question> questions = questionService.findAllByCategoryId(id);
+
         model.addAttribute("category", category);
         model.addAttribute("questions", questions);
         addGlobalAttributes(model);
