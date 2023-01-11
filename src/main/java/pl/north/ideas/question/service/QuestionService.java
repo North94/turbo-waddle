@@ -57,4 +57,8 @@ public class QuestionService {
     public Page<Question> findHot(Pageable pageable) {
         return questionRepository.findHot(pageable);
     }
+    @Transactional(readOnly = true)
+    public Page<Question> findUnanswered(Pageable pageable) {
+        return questionRepository.findUnanswered(pageable);
+    }
 }

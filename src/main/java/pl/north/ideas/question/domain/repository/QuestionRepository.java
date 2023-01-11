@@ -15,4 +15,8 @@ public interface QuestionRepository extends JpaRepository <Question, UUID> {
     List<Question> findAllByCategoryId(UUID id);
     @Query(value = "from Question q order by q.answers.size desc")
     Page<Question> findHot(Pageable pageable);
+
+
+    @Query(value = "from Question q where q.answers.size = 0")
+    Page<Question> findUnanswered(Pageable pageable);
 }
