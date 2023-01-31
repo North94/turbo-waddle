@@ -102,4 +102,7 @@ class CategoryApiControllerTest {
         mockMvc.perform(delete("http://localhost:8080/api/v1/categories/{categoryId}", category.getId()))
                 .andExpect(status().isNoContent());
     }
+    //
+    //
+    //
 }
