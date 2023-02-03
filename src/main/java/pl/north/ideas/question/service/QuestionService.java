@@ -2,20 +2,25 @@ package pl.north.ideas.question.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.domain.repository.QuestionRepository;
+import pl.north.ideas.question.dto.QuestionDto;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
+
+    private final QuestionMapper questionMapper;
 
 
     @Transactional(readOnly = true)
@@ -61,5 +66,20 @@ public class QuestionService {
 
     public Page<Question> findByQuery(String query, Pageable pageable) {
         return questionRepository.findByQuery(query, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public List<QuestionDto> findTop(int limit) {
+        return questionRepository.findAll(PageRequest.of(0, limit))
+                .get()
+                .map(questionMapper::map)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<QuestionDto> findTop(UUID categoryId, int limit){
+        return questionRepository.findAllByCategoryId(categoryId, PageRequest.of(0, limit))
+                .stream()
+                .map(questionMapper::map)
+                .collect(Collectors.toList());
     }
 }

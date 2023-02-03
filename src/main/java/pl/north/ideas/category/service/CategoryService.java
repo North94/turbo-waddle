@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.domain.repository.CategoryRepository;
+import pl.north.ideas.category.dto.CategoryWithStatisticsDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -58,4 +59,7 @@ public class CategoryService {
 
     }
 
+    public List<CategoryWithStatisticsDto> findAllWithStatistics() {
+        return  categoryRepository.findAllWithStatistics();
+    }
 }

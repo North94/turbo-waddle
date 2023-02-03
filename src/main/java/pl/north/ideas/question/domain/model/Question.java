@@ -6,6 +6,7 @@ import lombok.ToString;
 import pl.north.ideas.category.domain.model.Category;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -25,6 +26,8 @@ public class Question {
 
     @OneToMany(mappedBy = "question")
     private Set<Answer> answers;
+    private LocalDateTime created;
+    private LocalDateTime modified;
 
 
     public Question() {
@@ -36,6 +39,18 @@ public class Question {
         this();
         this.name = name;
     }
+
+    @PrePersist
+    void prePersist() {
+        created = LocalDateTime.now();
+        modified = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        modified = LocalDateTime.now();
+    }
+
     public Question addAnswer(Answer answer) {
         if (answers == null) {
             answers = new LinkedHashSet<>();
