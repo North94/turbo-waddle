@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.north.ideas.common.dto.StatisticsDto;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.domain.repository.QuestionRepository;
 import pl.north.ideas.question.dto.QuestionDto;
@@ -76,10 +77,21 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
     @Transactional(readOnly = true)
-    public List<QuestionDto> findTop(UUID categoryId, int limit){
-        return questionRepository.findAllByCategoryId(categoryId, PageRequest.of(0, limit))
+    public List<QuestionDto> findTop(UUID categoryId, int limit) {
+        return questionRepository.findAllByCategoryId(categoryId)
                 .stream()
                 .map(questionMapper::map)
                 .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<QuestionDto> findRandom(int limit) {
+        return questionRepository.findRandomQuestions(limit)
+                .stream()
+                .map(questionMapper::map)
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public StatisticsDto statistics() {
+        return questionRepository.statistics();
     }
 }

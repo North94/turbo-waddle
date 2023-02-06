@@ -58,7 +58,7 @@ public class CategoryService {
         categoryRepository.deleteById(id);
 
     }
-
+@Transactional(readOnly = true)
     public List<CategoryWithStatisticsDto> findAllWithStatistics() {
         return  categoryRepository.findAllWithStatistics();
     }

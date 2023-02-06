@@ -1,57 +1,50 @@
-insert into categories (id, name)
-values
-    (gen_random_uuid(), 'Zdrowie'),
-    (gen_random_uuid(), 'Turystyka'),
-    (gen_random_uuid(), 'Hobby'),
-    (gen_random_uuid(), 'Gry'),
-    (gen_random_uuid(), 'Biznes'),
-    (gen_random_uuid(), 'Edukacja'),
-    (gen_random_uuid(), 'Uroda'),
-    (gen_random_uuid(), 'Styl'),
-    (gen_random_uuid(), 'Zwierzęta'),
-    (gen_random_uuid(), 'Zakupy'),
-    (gen_random_uuid(), 'Praca'),
-    (gen_random_uuid(), 'Wakacje'),
-    (gen_random_uuid(), 'Sport'),
-    (gen_random_uuid(), 'Rozrywka'),
-    (gen_random_uuid(), 'Zabawy'),
-    (gen_random_uuid(), 'Praca'),
-    (gen_random_uuid(), 'Lekcje'),
-    (gen_random_uuid(), 'Dzieci'),
-    (gen_random_uuid(), 'Przyszłość'),
-    (gen_random_uuid(), 'Jakość'),
-    (gen_random_uuid(), 'Leki'),
-    (gen_random_uuid(), 'aaa'),
-    (gen_random_uuid(), 'sss'),
-    (gen_random_uuid(), 'qqq'),
-    (gen_random_uuid(), 'www'),
-    (gen_random_uuid(), 'eee'),
-    (gen_random_uuid(), 'rrr'),
-    (gen_random_uuid(), 'ttt'),
-    (gen_random_uuid(), 'yyy'),
-    (gen_random_uuid(), 'uuu'),
-    (gen_random_uuid(), 'iii'),
-    (gen_random_uuid(), 'ooo'),
-    (gen_random_uuid(), 'ppp'),
-    (gen_random_uuid(), 'ddd'),
-    (gen_random_uuid(), 'fff'),
-    (gen_random_uuid(), 'ggg'),
-    (gen_random_uuid(), 'hhh'),
-    (gen_random_uuid(), 'jjj'),
-    (gen_random_uuid(), 'jjj'),
-    (gen_random_uuid(), 'kkk'),
-    (gen_random_uuid(), 'lll'),
-    (gen_random_uuid(), 'zzz'),
-    (gen_random_uuid(), 'xxx'),
-    (gen_random_uuid(), 'ccc');
+insert into categories (id, name) values
+	(gen_random_uuid(), 'Zdrowie'),
+	(gen_random_uuid(), 'Zwierzęta'),
+	(gen_random_uuid(), 'Turystyka'),
+	(gen_random_uuid(), 'Uroda i Styl'),
+	(gen_random_uuid(), 'Kultura'),
+	(gen_random_uuid(), 'Edukacja'),
+	(gen_random_uuid(), 'Gry'),
+	(gen_random_uuid(), 'Hobby'),
+	(gen_random_uuid(), 'Dom i Ogród'),
+	(gen_random_uuid(), 'Biznes'),
+	(gen_random_uuid(), 'Finanse'),
+	(gen_random_uuid(), 'Kulinaria'),
+	(gen_random_uuid(), 'Komputery'),
+	(gen_random_uuid(), 'Osobiste'),
+	(gen_random_uuid(), 'Motoryzacja'),
+	(gen_random_uuid(), 'Polityka'),
+	(gen_random_uuid(), 'Praca'),
+	(gen_random_uuid(), 'Prezenty'),
+	(gen_random_uuid(), 'Zakupy'),
+	(gen_random_uuid(), 'Elektronika'),
+	(gen_random_uuid(), 'Rozrywka'),
+	(gen_random_uuid(), 'Sex'),
+	(gen_random_uuid(), 'Związki'),
+	(gen_random_uuid(), 'Inne');
 
 
-insert into questions (id, name, category_id)
-values  (gen_random_uuid(), 'Gdzie najlepiej spędzić kultur w Polsce', (select id from categories where name = 'Gry')),
-        (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacj w Polsce', (select id from categories where name = 'Turystyka'));
-
-insert into questions (id, name, category_id)
-values  (gen_random_uuid(), 'Gdzie najlepiej spędzić kultre w Polsce', (select id from categories where name = 'Edukacja')),
-        (gen_random_uuid(), 'Gdzie najlepiej spędzić wakcje w Polsce', (select id from categories where name = 'Edukacja'));
+insert into questions (id, name, category_id) values
+                                                  (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Polsce', (select id from categories where name = 'Turystyka')),
+                                                  (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Europie', (select id from categories where name = 'Turystyka'));
 
 
+insert into questions (id, name, category_id) values
+                                                  (gen_random_uuid(), 'Dlaczego warto uczyć się programowania', (select id from categories where name = 'Edukacja')),
+                                                  (gen_random_uuid(), 'Dlaczego Java jest dobrym językiem na start', (select id from categories where name = 'Edukacja'));
+
+insert into questions (id, name, category_id) values
+    (gen_random_uuid(), 'Jakie są najzdrowsze warzywa?', (select id from categories where name = 'Zdrowie'));
+
+insert into answers (id, name, question_id) values
+                                                (gen_random_uuid(), 'Marchewka', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Brokuł', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Dynia', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Groch', (select id from questions where name = 'Jakie są najzdrowsze warzywa?'));
+
+
+insert into answers (id, name, question_id) values
+                                                (gen_random_uuid(), 'Gdańsk', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje z Polsce')),
+                                                (gen_random_uuid(), 'Bieszczady', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje z Polsce')),
+                                                (gen_random_uuid(), 'Mazury', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje z Polsce'));

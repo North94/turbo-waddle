@@ -5,8 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pl.north.ideas.common.dto.StatisticsDto;
 import pl.north.ideas.question.domain.model.Question;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,6 +22,9 @@ public interface QuestionRepository extends JpaRepository <Question, UUID> {
     @Query(value = "from Question q where q.answers.size = 0")
     Page<Question> findUnanswered(Pageable pageable);
 
+    @Query(value = "select new pl.north.ideas.common.dto.StatisticsDto(count(q), count(a)) from Question q join q.answers a")
+    StatisticsDto statistics();
+
 
     @Query(
             value = "select * from questions q where upper(q.name) like upper('%' || :query || '%') ",
@@ -27,4 +32,8 @@ public interface QuestionRepository extends JpaRepository <Question, UUID> {
             nativeQuery = true
     )
     Page<Question> findByQuery(String query, Pageable pageable);
+
+    @Query(value = "select * from questions q order by random() limit :limit", nativeQuery = true)
+    List<Question> findRandomQuestions(int limit);
+
 }

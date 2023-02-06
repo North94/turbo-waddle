@@ -37,6 +37,11 @@ public class IndexViewController extends IdeasCommonViewController {
         return topQuestions;
     }
 
+    public List<QuestionDto> randomQuestions() {
+        List<QuestionDto>   randomQuestions = questionService.findRandom(2);
+        return randomQuestions;
+    }
+
 
 
 }
