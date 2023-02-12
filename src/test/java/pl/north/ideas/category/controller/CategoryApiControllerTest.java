@@ -34,7 +34,7 @@ class CategoryApiControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoryService categoryService
+    private CategoryService categoryService;
     @Autowired
     private ObjectMapper objectMapper;
     private PageImpl<Category> page;

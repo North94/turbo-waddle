@@ -31,7 +31,7 @@ delete from answers;
 delete from questions;
 delete from categories;
 
---changeset NorthoS:001_3
+--changeset Northo:001_3
 insert into categories (id, name) values
                                       (gen_random_uuid(), 'Zdrowie'),
                                       (gen_random_uuid(), 'Zwierzęta'),
