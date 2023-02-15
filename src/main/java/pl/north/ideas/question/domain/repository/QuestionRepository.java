@@ -5,8 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pl.north.ideas.category.dto.CategoryWithStatisticsDto;
 import pl.north.ideas.common.dto.StatisticsDto;
 import pl.north.ideas.question.domain.model.Question;
+import pl.north.ideas.question.dto.QuestionWithStatisticsDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,4 +38,5 @@ public interface QuestionRepository extends JpaRepository <Question, UUID> {
     @Query(value = "select * from questions q order by random() limit :limit", nativeQuery = true)
     List<Question> findRandomQuestions(int limit);
 
+    Page<Question> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

@@ -36,7 +36,7 @@ class QuestionServiceIT {
 
     @Test
     void getQuestions() {
-        // giwen
+        // given
         questionRepository.deleteAll();
 
         questionRepository.saveAll(List.of(

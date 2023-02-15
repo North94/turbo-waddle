@@ -7,7 +7,6 @@ import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.domain.repository.CategoryRepository;
 import pl.north.ideas.category.dto.CategoryWithStatisticsDto;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,6 +59,6 @@ public class CategoryService {
     }
 @Transactional(readOnly = true)
     public List<CategoryWithStatisticsDto> findAllWithStatistics() {
-        return  categoryRepository.findAllWithStatistics();
+        return  categoryRepository.findAllWithStatisticsCategory();
     }
 }

@@ -20,6 +20,5 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
             "left join c.questions q " +
             "left join q.answers a " +
             "group by c.id ")
-
-    List<CategoryWithStatisticsDto> findAllWithStatistics();
+    List<CategoryWithStatisticsDto> findAllWithStatisticsCategory();
 }

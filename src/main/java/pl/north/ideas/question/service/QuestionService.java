@@ -10,6 +10,7 @@ import pl.north.ideas.common.dto.StatisticsDto;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.domain.repository.QuestionRepository;
 import pl.north.ideas.question.dto.QuestionDto;
+import pl.north.ideas.question.dto.QuestionWithStatisticsDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -93,5 +94,24 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public StatisticsDto statistics() {
         return questionRepository.statistics();
+    }
+
+
+    public Page<Question> getQuestions(String search, Pageable pageable) {
+        if (search == null) {
+            return questionRepository.findAll(pageable);
+        } else {
+            return questionRepository.findByNameContainingIgnoreCase(search, pageable);
+        }
+    }
+    @Transactional(readOnly = true)
+    public List<QuestionWithStatisticsDto> findAllWithStatisticsQuestions() {
+        List<Question> questions = questionRepository.findAll();
+
+        List<QuestionWithStatisticsDto> mappedQuestions = new ArrayList<>();
+        for (Question question: questions) {
+            mappedQuestions.add(QuestionWithStatisticsMapper.map(question));
+        }
+        return mappedQuestions;
     }
 }
