@@ -12,6 +12,7 @@ import pl.north.ideas.question.domain.repository.QuestionRepository;
 import pl.north.ideas.question.dto.QuestionDto;
 import pl.north.ideas.question.dto.QuestionWithStatisticsDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,8 +22,6 @@ import java.util.stream.Collectors;
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
-
-    private final QuestionMapper questionMapper;
 
 
     @Transactional(readOnly = true)
@@ -74,21 +73,21 @@ public class QuestionService {
     public List<QuestionDto> findTop(int limit) {
         return questionRepository.findAll(PageRequest.of(0, limit))
                 .get()
-                .map(questionMapper::map)
+                .map(QuestionMapper::map)
                 .collect(Collectors.toList());
     }
     @Transactional(readOnly = true)
     public List<QuestionDto> findTop(UUID categoryId, int limit) {
         return questionRepository.findAllByCategoryId(categoryId)
                 .stream()
-                .map(questionMapper::map)
+                .map(QuestionMapper::map)
                 .collect(Collectors.toList());
     }
     @Transactional(readOnly = true)
     public List<QuestionDto> findRandom(int limit) {
         return questionRepository.findRandomQuestions(limit)
                 .stream()
-                .map(questionMapper::map)
+                .map(QuestionMapper::map)
                 .collect(Collectors.toList());
     }
     @Transactional(readOnly = true)

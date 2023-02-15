@@ -1,12 +1,10 @@
 package pl.north.ideas.question.service;
 
-import org.springframework.stereotype.Component;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.dto.QuestionDto;
 
-@Component
 public class QuestionMapper {
-    public QuestionDto map(Question question) {
+    public static QuestionDto map(Question question) {
         QuestionDto questionDto = new QuestionDto();
         questionDto.setId(question.getId());
         questionDto.setName(question.getName());

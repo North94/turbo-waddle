@@ -1,6 +1,7 @@
 package pl.north.ideas.category.domain.model;
 
 
+import lombok.Getter;
 import pl.north.ideas.question.domain.model.Question;
 
 import javax.persistence.Entity;
