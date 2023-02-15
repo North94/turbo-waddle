@@ -15,7 +15,7 @@ import pl.north.ideas.question.service.QuestionService;
 
 import java.util.UUID;
 
-import static pl.north.ideas.common.controller.ControllerUtils.*;
+import static pl.north.ideas.common.controller.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("/questions")
@@ -26,8 +26,6 @@ public class QuestionViewController extends IdeasCommonViewController {
     private final AnswerService answerService;
     private final CategoryService categoryService;
     private final IdeasConfiguration ideasConfiguration;
-
-
 
 
     @GetMapping
@@ -58,26 +56,28 @@ public class QuestionViewController extends IdeasCommonViewController {
         return "redirect:/questions";
 
     }
+
     @GetMapping("hot")
     public String hotView(
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model
-    ){
+    ) {
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
 
-       Page<Question> questionsPage = questionService.findHot(pageRequest);
+        Page<Question> questionsPage = questionService.findHot(pageRequest);
 
-       model.addAttribute("questionsPage", questionsPage);
+        model.addAttribute("questionsPage", questionsPage);
         paging(model, questionsPage);
         addGlobalAttributes(model);
         return "question/index";
 
     }
+
     @GetMapping("unanswered")
     public String unansweredView(
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model
-    ){
+    ) {
         PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
 
         Page<Question> questionsPage = questionService.findUnanswered(pageRequest);

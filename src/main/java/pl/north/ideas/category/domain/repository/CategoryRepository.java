@@ -14,6 +14,7 @@ import java.util.UUID;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, UUID> {
     Page<Category> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
     @Query(value = "select new pl.north.ideas.category.dto.CategoryWithStatisticsDto(" +
             "c.id, c.name, count(q), count(a)) " +
             "from Category c " +

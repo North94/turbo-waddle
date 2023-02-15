@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "ideas")
 @Data
 public class IdeasConfiguration {
-  //  public int getPagingPageSize;
+    //  public int getPagingPageSize;
     private String name;
     @Value("${paging.pageSize:2}")
     private int pagingPageSize;

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.north.ideas.category.domain.model.Category;
+import pl.north.ideas.category.service.CategoryService;
 import pl.north.ideas.common.controller.IdeasCommonViewController;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.service.QuestionService;
-import pl.north.ideas.category.service.CategoryService;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +24,7 @@ public class CategoryViewController extends IdeasCommonViewController {
     private final QuestionService questionService;
 
     @GetMapping("{id}")
-    public String singleView(@PathVariable UUID id, Model model){
+    public String singleView(@PathVariable UUID id, Model model) {
         Category category = categoryService.getCategory(id);
         List<Question> questions = questionService.findAllByCategoryId(id);
 

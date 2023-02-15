@@ -28,22 +28,26 @@ public class QuestionService {
     public List<Question> getQuestions() {
         return questionRepository.findAll();
     }
+
     @Transactional(readOnly = true)
     public Question getQuestion(UUID id) {
         return questionRepository.getById(id);
     }
+
     @Transactional
     public Question createQuestion(Question questionRequest) {
         Question question = new Question();
         question.setName(questionRequest.getName());
         return questionRepository.save(question);
     }
+
     @Transactional
     public Question updateQuestion(UUID id, Question questionRequest) {
         Question question = questionRepository.getById(id);
         question.setName(questionRequest.getName());
         return questionRepository.save(question);
     }
+
     @Transactional
     public void deleteQuestion(UUID id) {
         questionRepository.deleteById(id);
@@ -52,7 +56,7 @@ public class QuestionService {
 
     @Transactional(readOnly = true)
     public List<Question> findAllByCategoryId(UUID id) {
-       return questionRepository.findAllByCategoryId(id);
+        return questionRepository.findAllByCategoryId(id);
 
     }
 
@@ -60,6 +64,7 @@ public class QuestionService {
     public Page<Question> findHot(Pageable pageable) {
         return questionRepository.findHot(pageable);
     }
+
     @Transactional(readOnly = true)
     public Page<Question> findUnanswered(Pageable pageable) {
         return questionRepository.findUnanswered(pageable);
@@ -76,6 +81,7 @@ public class QuestionService {
                 .map(QuestionMapper::map)
                 .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     public List<QuestionDto> findTop(UUID categoryId, int limit) {
         return questionRepository.findAllByCategoryId(categoryId)
@@ -83,6 +89,7 @@ public class QuestionService {
                 .map(QuestionMapper::map)
                 .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     public List<QuestionDto> findRandom(int limit) {
         return questionRepository.findRandomQuestions(limit)
@@ -90,6 +97,7 @@ public class QuestionService {
                 .map(QuestionMapper::map)
                 .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     public StatisticsDto statistics() {
         return questionRepository.statistics();
@@ -103,12 +111,13 @@ public class QuestionService {
             return questionRepository.findByNameContainingIgnoreCase(search, pageable);
         }
     }
+
     @Transactional(readOnly = true)
     public List<QuestionWithStatisticsDto> findAllWithStatisticsQuestions() {
         List<Question> questions = questionRepository.findAll();
 
         List<QuestionWithStatisticsDto> mappedQuestions = new ArrayList<>();
-        for (Question question: questions) {
+        for (Question question : questions) {
             mappedQuestions.add(QuestionWithStatisticsMapper.map(question));
         }
         return mappedQuestions;

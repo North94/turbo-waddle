@@ -1,4 +1,5 @@
 package pl.north.ideas.category.service;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,17 +28,19 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public Page<Category> getCategories(String search, Pageable pageable) {
-        if(search == null) {
+        if (search == null) {
             return categoryRepository.findAll(pageable);
         } else {
             return categoryRepository.findByNameContainingIgnoreCase(search, pageable);
         }
     }
+
     @Transactional(readOnly = true)
     public Category getCategory(UUID id) {
 
         return categoryRepository.getById(id);
     }
+
     @Transactional
     public Category createCategory(Category categoryRequest) {
         Category category = new Category();
@@ -45,6 +48,7 @@ public class CategoryService {
         category.setName(categoryRequest.getName());
         return categoryRepository.save(category);
     }
+
     @Transactional
     public Category updateCategory(UUID id, Category categoryRequest) {
         Category category = categoryRepository.getById(id);
@@ -52,13 +56,15 @@ public class CategoryService {
         category.setName(categoryRequest.getName());
         return categoryRepository.save(category);
     }
+
     @Transactional
     public void deleteCategory(UUID id) {
         categoryRepository.deleteById(id);
 
     }
-@Transactional(readOnly = true)
+
+    @Transactional(readOnly = true)
     public List<CategoryWithStatisticsDto> findAllWithStatistics() {
-        return  categoryRepository.findAllWithStatisticsCategory();
+        return categoryRepository.findAllWithStatisticsCategory();
     }
 }

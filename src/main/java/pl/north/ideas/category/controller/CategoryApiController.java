@@ -7,9 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.service.CategoryService;
-// import pl.north.ideas.category.domain.model.Category;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController

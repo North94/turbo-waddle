@@ -22,7 +22,7 @@ public class IndexViewController extends IdeasCommonViewController {
     @GetMapping
     public String indexView(
             Model model
-    ){
+    ) {
         addGlobalAttributes(model);
         List<QuestionDto> questionsTop = questionService.findTop(2);
         model.addAttribute("questionsTop", questionsTop);
@@ -32,16 +32,16 @@ public class IndexViewController extends IdeasCommonViewController {
 
         return "index/index";
     }
-    public List<QuestionDto> topQuestionsByCategory(UUID categoryId){
+
+    public List<QuestionDto> topQuestionsByCategory(UUID categoryId) {
         List<QuestionDto> topQuestions = questionService.findTop(categoryId, 2);
         return topQuestions;
     }
 
     public List<QuestionDto> randomQuestions() {
-        List<QuestionDto>   randomQuestions = questionService.findRandom(2);
+        List<QuestionDto> randomQuestions = questionService.findRandom(2);
         return randomQuestions;
     }
-
 
 
 }

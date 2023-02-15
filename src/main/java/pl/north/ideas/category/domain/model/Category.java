@@ -1,7 +1,6 @@
 package pl.north.ideas.category.domain.model;
 
 
-import lombok.Getter;
 import pl.north.ideas.question.domain.model.Question;
 
 import javax.persistence.Entity;
@@ -12,12 +11,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
+
 @Entity
 @Table(name = "categories")
 public class Category {
     public Category() {
         this.id = UUID.randomUUID();
     }
+
     @Id
     private UUID id;
     @NotBlank(message = "{ideas.validation.name.NotBlank.message}")

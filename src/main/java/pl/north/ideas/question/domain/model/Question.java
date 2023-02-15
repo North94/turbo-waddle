@@ -7,10 +7,10 @@ import pl.north.ideas.category.domain.model.Category;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
+
 @Entity
 @Table(name = "questions")
 @Getter

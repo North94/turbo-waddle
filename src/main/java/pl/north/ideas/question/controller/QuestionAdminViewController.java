@@ -9,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.north.ideas.category.domain.model.Category;
-import pl.north.ideas.category.service.CategoryService;
 import pl.north.ideas.common.dto.Message;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.service.QuestionService;
@@ -36,13 +34,13 @@ public class QuestionAdminViewController {
             @RequestParam(name = "s", required = false) String search,
             @RequestParam(name = "field", required = false, defaultValue = "id") String field,
             @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
-            @RequestParam(name = "page", required = false, defaultValue = "0") int  page,
-            @RequestParam(name = "size", required = false, defaultValue = "20") int  size,
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "20") int size,
             Model model
-    ){
+    ) {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(direction), field);
         String reverseSort;
-        if("asc".equals(direction)){
+        if ("asc".equals(direction)) {
             reverseSort = "desc";
         } else {
             reverseSort = "asc";
@@ -56,8 +54,9 @@ public class QuestionAdminViewController {
         return "admin/question/index";
 
     }
+
     @GetMapping("{id}")
-    public String editView(Model model, @PathVariable UUID id){
+    public String editView(Model model, @PathVariable UUID id) {
         model.addAttribute("question", questionService.getQuestion(id));
 
         return "admin/question/edit";
@@ -71,31 +70,32 @@ public class QuestionAdminViewController {
             BindingResult bindingResult,
             RedirectAttributes ra,
             Model model
-    ){
-        if(bindingResult.hasErrors()){
+    ) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("category", question);
             model.addAttribute("message", Message.error("Błąd zapisu"));
-            return  "admin/question/edit";
+            return "admin/question/edit";
         }
         try {
             questionService.updateQuestion(id, question);
             ra.addFlashAttribute("message", Message.info("Pytanie zapisane"));
 
-        } catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("category", question);
             model.addAttribute("message", Message.error("Nieznany błąd zapisu"));
-            return  "admin/question/edit";
+            return "admin/question/edit";
         }
 
-        return  "redirect:/admin/questiions";
+        return "redirect:/admin/questiions";
 
     }
+
     @GetMapping("{id}/delete")
-    public String deleteView(Model model, @PathVariable UUID id, RedirectAttributes ra){
+    public String deleteView(Model model, @PathVariable UUID id, RedirectAttributes ra) {
         questionService.deleteQuestion(id);
         ra.addFlashAttribute("message", Message.info("Pytanie usunięte"));
 
-        return  "redirect:/admin/questions";
+        return "redirect:/admin/questions";
     }
 
 }

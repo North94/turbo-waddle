@@ -13,7 +13,6 @@ import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.service.CategoryService;
 import pl.north.ideas.common.dto.Message;
 
-
 import javax.validation.Valid;
 import java.util.UUID;
 
@@ -35,13 +34,13 @@ public class CategoryAdminViewController {
             @RequestParam(name = "s", required = false) String search,
             @RequestParam(name = "field", required = false, defaultValue = "id") String field,
             @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
-            @RequestParam(name = "page", required = false, defaultValue = "0") int  page,
-            @RequestParam(name = "size", required = false, defaultValue = "20") int  size,
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "size", required = false, defaultValue = "20") int size,
             Model model
-    ){
+    ) {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(direction), field);
         String reverseSort;
-        if("asc".equals(direction)){
+        if ("asc".equals(direction)) {
             reverseSort = "desc";
         } else {
             reverseSort = "asc";
@@ -55,8 +54,9 @@ public class CategoryAdminViewController {
         return "admin/category/index";
 
     }
+
     @GetMapping("{id}")
-    public String editView(Model model, @PathVariable UUID id){
+    public String editView(Model model, @PathVariable UUID id) {
         model.addAttribute("category", categoryService.getCategory(id));
 
         return "admin/category/edit";
@@ -70,31 +70,32 @@ public class CategoryAdminViewController {
             BindingResult bindingResult,
             RedirectAttributes ra,
             Model model
-    ){
-        if(bindingResult.hasErrors()){
+    ) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("category", category);
             model.addAttribute("message", Message.error("Błąd zapisu"));
-            return  "admin/category/edit";
+            return "admin/category/edit";
         }
         try {
             categoryService.updateCategory(id, category);
             ra.addFlashAttribute("message", Message.info("Kategoria zapisana"));
 
-        } catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("category", category);
             model.addAttribute("message", Message.error("Nieznany błąd zapisu"));
-            return  "admin/category/edit";
+            return "admin/category/edit";
         }
 
-        return  "redirect:/admin/categories";
+        return "redirect:/admin/categories";
 
     }
+
     @GetMapping("{id}/delete")
-    public String deleteView(Model model, @PathVariable UUID id, RedirectAttributes ra){
+    public String deleteView(Model model, @PathVariable UUID id, RedirectAttributes ra) {
         categoryService.deleteCategory(id);
         ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
 
-        return  "redirect:/admin/categories";
+        return "redirect:/admin/categories";
     }
 
 }
