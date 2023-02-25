@@ -11,7 +11,6 @@ import pl.north.ideas.question.service.QuestionService;
 @RequestMapping("/admin")
 @RequiredArgsConstructor
 public class AdminViewController {
-
     private final QuestionService questionService;
 
     @GetMapping

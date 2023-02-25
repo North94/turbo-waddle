@@ -40,10 +40,10 @@ public class CategoryAdminViewController {
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(direction), field);
         String reverseSort;
-        if ("asc".equals(direction)) {
-            reverseSort = "desc";
-        } else {
-            reverseSort = "asc";
+            if ("asc".equals(direction)) {
+                reverseSort = "desc";
+            } else {
+                reverseSort = "asc";
         }
         Page<Category> categoriesPage = categoryService.getCategories(search, pageable);
         model.addAttribute("categoriesPage", categoriesPage);

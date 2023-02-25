@@ -3,16 +3,19 @@ package pl.north.ideas.question.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.north.ideas.IdeasConfiguration;
+import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.service.CategoryService;
 import pl.north.ideas.common.controller.IdeasCommonViewController;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.service.AnswerService;
 import pl.north.ideas.question.service.QuestionService;
 
+import java.util.List;
 import java.util.UUID;
 
 import static pl.north.ideas.common.controller.ControllerUtils.paging;
@@ -46,6 +49,8 @@ public class QuestionViewController extends IdeasCommonViewController {
     @GetMapping("add")
     public String addView(Model model) {
         model.addAttribute("question", new Question());
+        Page<Category> categories = categoryService.getCategories(Pageable.unpaged());
+        model.addAttribute("category", categories);
         return "question/add";
     }
 

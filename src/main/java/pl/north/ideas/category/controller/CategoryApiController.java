@@ -31,7 +31,6 @@ public class CategoryApiController {
     @ResponseStatus(HttpStatus.CREATED)
     Category createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);
-
     }
 
     @PutMapping("{id}")
@@ -44,7 +43,6 @@ public class CategoryApiController {
     @DeleteMapping("{id}")
     void deleteCategory(@PathVariable UUID id) {
         categoryService.deleteCategory(id);
-
     }
 
 }

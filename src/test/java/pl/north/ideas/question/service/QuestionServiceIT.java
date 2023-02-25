@@ -33,17 +33,18 @@ class QuestionServiceIT {
     void setUp() {
     }
 
-
-    @Test
-    void getQuestions() {
-        // given
+    @BeforeEach
+    void ShouldSaveQuestion(){
         questionRepository.deleteAll();
-
         questionRepository.saveAll(List.of(
                 new Question("Question1"),
                 new Question("Question2"),
                 new Question("Question3")
-        ));
+                ));
+    }
+    @Test
+    void getQuestions() {
+        // given
         // when
         List<Question> questions = questionService.getQuestions();
         // then
@@ -54,34 +55,61 @@ class QuestionServiceIT {
     }
 
     @Test
-    void getQuestion() {
+    void shouldGetQuestion() {
+        //given
+        Question question = new Question("Question4");
+        //when
+        Question result = questionService.getQuestion(question.getId());
+        //then
+        assertThat(result.getId()).isEqualTo(question.getId());
     }
 
     @Test
     void createQuestion() {
+        // given
+        // when
+        // then
     }
 
     @Test
     void updateQuestion() {
+        // given
+        // when
+        // then
     }
 
     @Test
     void deleteQuestion() {
+        // given
+        // when
+        // then
     }
 
     @Test
     void findAllByCategoryId() {
+        // given
+        // when
+        // then
     }
 
     @Test
     void findHot() {
+        // given
+        // when
+        // then
     }
 
     @Test
     void findUnanswered() {
+        // given
+        // when
+        // then
     }
 
     @Test
     void findByQuery() {
+        // given
+        // when
+        // then
     }
 }

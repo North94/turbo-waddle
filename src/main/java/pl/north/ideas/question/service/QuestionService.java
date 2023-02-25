@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.north.ideas.category.domain.model.Category;
+import pl.north.ideas.category.domain.repository.CategoryRepository;
 import pl.north.ideas.common.dto.StatisticsDto;
 import pl.north.ideas.question.domain.model.Question;
 import pl.north.ideas.question.domain.repository.QuestionRepository;
@@ -38,6 +40,7 @@ public class QuestionService {
     public Question createQuestion(Question questionRequest) {
         Question question = new Question();
         question.setName(questionRequest.getName());
+        question.setCategory(questionRequest.getCategory());
         return questionRepository.save(question);
     }
 

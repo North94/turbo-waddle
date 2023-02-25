@@ -1,38 +1,33 @@
 --liquibase formatted sql
 
 --changeset Northo:001_1
+DROP table if exists answers CASCADE;
+DROP table if exists questions CASCADE;
+DROP table if exists categories CASCADE ;
 
-create table if not exists categories (
-                                          id   uuid not null
+create table categories (
+                                          category_id   uuid not null
                                           primary key,
                                           name varchar(255)
     );
-create table if not exists questions (
-                                         id          uuid not null
+create table questions (
+                                         question_id          uuid not null
                                          primary key,
                                          created     timestamp,
                                          modified    timestamp,
                                          name        varchar(255),
     category_id uuid
-    constraint fkctl6tuf74n8cufkb3ulj6b3fc
-    references categories
+        references categories
     );
-create table if not exists answers (
-                                       id          uuid not null
+create table answers (
+                                       answer_id          uuid not null
                                        primary key,
                                        name        varchar(255),
     question_id uuid
-    constraint fk3erw1a3t0r78st8ty27x6v3g1
-    references questions
+        references questions
     );
-
 --changeset Northo:001_2
-delete from answers;
-delete from questions;
-delete from categories;
-
---changeset Northo:001_3
-insert into categories (id, name) values
+insert into categories (category_id, name) values
                                       (gen_random_uuid(), 'Zdrowie'),
                                       (gen_random_uuid(), 'Zwierzęta'),
                                       (gen_random_uuid(), 'Turystyka'),
@@ -58,6 +53,28 @@ insert into categories (id, name) values
                                       (gen_random_uuid(), 'Związki'),
                                       (gen_random_uuid(), 'Inne');
 
-insert into questions (id, name, category_id) values
-                                                  (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Polsce', (select id from categories where name = 'Turystyka')),
-                                                  (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Europie', (select id from categories where name = 'Turystyka'));
+insert into questions (question_id, name, category_id) values
+    (gen_random_uuid(), 'Jakie są najzdrowsze warzywa?', (select category_id from categories where name = 'Zdrowie'));
+
+insert into questions (question_id, name, category_id) values
+(gen_random_uuid(), 'Dlaczego warto uczyć się programowania', (select category_id from categories where name = 'Edukacja')),
+(gen_random_uuid(), 'Dlaczego Java jest dobrym językiem na start', (select category_id from categories where name = 'Edukacja'));
+
+insert into questions (question_id, name, category_id) values
+(gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Polsce', (select category_id from categories where name = 'Turystyka')),
+(gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje z Europie', (select category_id from categories where name = 'Turystyka'));
+
+
+insert into answers (answer_id, name, question_id) values
+(gen_random_uuid(), 'Marchewka', (select question_id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+(gen_random_uuid(), 'Brokuł', (select question_id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+(gen_random_uuid(), 'Dynia', (select question_id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+(gen_random_uuid(), 'Groch', (select question_id from questions where name = 'Jakie są najzdrowsze warzywa?'));
+
+insert into answers (answer_id, name, question_id) values
+(gen_random_uuid(), 'Gdańsk', (select question_id from questions where name = 'Gdzie najlepiej spędzić wakacje z Polsce')),
+(gen_random_uuid(), 'Bieszczady', (select question_id from questions where name = 'Gdzie najlepiej spędzić wakacje z Polsce')),
+(gen_random_uuid(), 'Mazury', (select question_id from questions where name = 'Gdzie najlepiej spędzić wakacje z Polsce'));
+
+
+

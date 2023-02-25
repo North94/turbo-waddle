@@ -5,13 +5,21 @@
     <title>form to add new question</title>
 </head>
 
-<body>
-    <h1>New question</h1>
-    <form th:object="${question}" method="post" action="/questions">
+<form th:action="@{/questions}" method="post">
+    <label for="questionName">Question name:</label>
+    <input type="text" id="questionName" name="name">
+    <br>
+    <br>
+    <label for="questionCategory">Question category:</label>
+    <select id="questionCategory" name="category">
+        <option th:each="category : ${category}"
+                th:value="${category.id}"
+                th:text="${category.name}">
+        </option>
+    </select>
+    <button type="submit">Create question</button>
+</form>
 
 
-        Name: <input type="text" th:field="*{name}" /> <br />
-        <input type="submit" value="Add" />
-    </form>
-</body>
+<!--    get htttp://www.twojastrona.com /questions?categoryname=hfasfhj-->
 </html>

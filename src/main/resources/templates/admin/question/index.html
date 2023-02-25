@@ -63,8 +63,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th><a th:class="'sort-'+${reverseSort}"
-                                                th:href="@{'/admin/questions'(s=${search}, field='name', direction=${reverseSort})}">Name</a></th>
-                                        <th>#</th>
+                                               th:href="@{'/admin/questions'(s=${search}, field='name', direction=${reverseSort})}">Name</a></th>
+                                        <th><a th:class="'sort-'+${reverseSort}"
+                                               th:href="@{'/admin/questions'(s=${search}, field='name', direction=${reverseSort})}">Category</a></th>
                                         <th>#</th>
 
                                         <th>#</th>
@@ -74,11 +75,7 @@
                                     <tr th:each="question, it : ${questionsPage.content}">
                                         <td th:text="${it.index}+1"></td>
                                         <td th:text="${question.name}"></td>
-
-                                        <td th:text="${question.answers}"></td>
-
                                         <td th:text="${question.category.name}"></td>
-
                                         <td>
                                             <a th:href="@{'/questions/'+${question.id}}" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-folder"></i></br> View
@@ -128,6 +125,5 @@
     <th:block th:replace="admin/template :: footer" />
 </div>
 <!-- ./wrapper -->
-
-
+</body>
 </html>

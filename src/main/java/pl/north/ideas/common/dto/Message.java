@@ -12,7 +12,6 @@ public class Message {
     public static Message info(String msg) {
         return new Message("info", msg);
     }
-
     public static Message error(String msg) {
         return new Message("Error", msg);
     }

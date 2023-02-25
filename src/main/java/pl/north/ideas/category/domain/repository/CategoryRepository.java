@@ -9,6 +9,7 @@ import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.dto.CategoryWithStatisticsDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -22,4 +23,9 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
             "left join q.answers a " +
             "group by c.id ")
     List<CategoryWithStatisticsDto> findAllWithStatisticsCategory();
+    Optional<Category> findById(UUID id);
+    Category getById(UUID id);
+
+    @Query("select c.name from Category c")
+    List<String> findAllCategoryNames();
 }

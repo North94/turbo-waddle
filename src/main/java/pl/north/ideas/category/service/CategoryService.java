@@ -37,22 +37,19 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public Category getCategory(UUID id) {
-
-        return categoryRepository.getById(id);
+        return categoryRepository.findById(id).orElse(null);
     }
 
     @Transactional
     public Category createCategory(Category categoryRequest) {
-        Category category = new Category();
-
-        category.setName(categoryRequest.getName());
-        return categoryRepository.save(category);
+//        Category category = new Category();
+//        category.setName(categoryRequest.getName());
+        return categoryRepository.save(categoryRequest);
     }
 
     @Transactional
     public Category updateCategory(UUID id, Category categoryRequest) {
         Category category = categoryRepository.getById(id);
-
         category.setName(categoryRequest.getName());
         return categoryRepository.save(category);
     }

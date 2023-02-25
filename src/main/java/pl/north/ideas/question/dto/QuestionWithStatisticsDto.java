@@ -10,10 +10,7 @@ import java.util.UUID;
 public class QuestionWithStatisticsDto {
 
     private UUID id;
-
     private String name;
-
     private String categoryName;
-
     private long answers;
 }
