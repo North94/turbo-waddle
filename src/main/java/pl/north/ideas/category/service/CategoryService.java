@@ -7,8 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.north.ideas.category.domain.model.Category;
 import pl.north.ideas.category.domain.repository.CategoryRepository;
 import pl.north.ideas.category.dto.CategoryWithStatisticsDto;
+import pl.north.ideas.question.domain.repository.QuestionRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service

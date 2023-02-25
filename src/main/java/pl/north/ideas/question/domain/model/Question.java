@@ -1,8 +1,6 @@
 package pl.north.ideas.question.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import pl.north.ideas.category.domain.model.Category;
 
 import javax.persistence.*;
@@ -11,6 +9,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
+
+@Data
 @Entity
 @Table(name = "questions")
 @Getter
@@ -18,10 +18,13 @@ import java.util.UUID;
 @ToString
 public class Question {
     @Id
+    @Column(name = "question_id")
     private UUID id;
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
+    @ToString.Exclude
     private Category category;
 
 

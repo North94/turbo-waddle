@@ -1,13 +1,12 @@
 package pl.north.ideas.question.domain.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
 
+@Data
 @Entity
 @Table(name = "answers")
 @Getter
@@ -20,6 +19,8 @@ public class Answer {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "question_id")
+    @ToString.Exclude
     private Question question;
     public Answer() {
         this.id = UUID.randomUUID();
